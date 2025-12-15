@@ -100,22 +100,20 @@
         const canvas = document.getElementById('warholWave');
         const ctx = canvas.getContext('2d');
 
-        // --- CONTROLS ---
         const verticalPosition = 0.75;
-        const tilt = 0.15;       // How steep the slope is
-        const speed = 0.2;       // Animation speed
-        const waveSize = 50;     // How tall the spikes are
+        const tilt = 0.15;     //steep, speed & height
+        const speed = 0.2;       
+        const waveSize = 50;     
 
         // DOT SETTINGS
-        const dotSize = 4;       // Size of the black dots
-        const dotSpacing = 15;   // Space between dots
-        // ----------------
+        const dotSize = 4;       
+        const dotSpacing = 15;   
 
         console.log("Warhol Wave Loaded with Dots.");
 
-        let dotPattern; // Variable to hold the pattern
+        let dotPattern; // var. holds pattern 
 
-        // Generate random wave properties
+        // random wave maths magic 
         const subWaves = [];
         for (let i = 0; i < 3; i++) {
             subWaves.push({
@@ -128,14 +126,12 @@
 
         let globalTime = 0;
 
-        // Helper: Creates the repeating dot pattern
         function createDotPattern() {
             const patternCanvas = document.createElement('canvas');
             patternCanvas.width = dotSpacing;
             patternCanvas.height = dotSpacing;
             const pCtx = patternCanvas.getContext('2d');
 
-            // Draw one black circle in the middle of the tile
             pCtx.fillStyle = "black";
             pCtx.beginPath();
             pCtx.arc(dotSpacing / 2, dotSpacing / 2, dotSize / 2, 0, Math.PI * 2);
@@ -147,7 +143,7 @@
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // Regenerate pattern on resize
+            // regenerate pattern on resize
             dotPattern = createDotPattern();
         }
         window.addEventListener('resize', resizeCanvas);
@@ -156,10 +152,8 @@
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // 1. Calculate all the points for the wave first
             const points = [];
 
-            // Step by 5 pixels for performance (drawing dots is heavy)
             for (let x = 0; x <= canvas.width; x += 5) {
                 const scaledX = x / 100;
 
@@ -179,23 +173,20 @@
                 points.push({ x, y });
             }
 
-            // 2. Draw the DOT FILL
             ctx.beginPath();
-            // Trace the wave
+            // trace wave
             ctx.moveTo(points[0].x, points[0].y);
             for (let i = 1; i < points.length; i++) {
                 ctx.lineTo(points[i].x, points[i].y);
             }
-            // Close the loop (down to bottom corners) to create a fillable shape
+            // close loop to make shape fillable
             ctx.lineTo(canvas.width, canvas.height);
             ctx.lineTo(0, canvas.height);
             ctx.closePath();
 
-            // Fill it
             ctx.fillStyle = dotPattern;
             ctx.fill();
 
-            // 3. Draw the BLACK OUTLINE
             ctx.beginPath();
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 5;
