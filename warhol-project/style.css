@@ -22,7 +22,7 @@
     display: inline-block;
 }
 
-/* Modifier Classes for Colors */
+/* colours for cards */
 .card-cyan {
     background-color: #00FFFF;
 }
@@ -35,29 +35,22 @@
     background-color: #FF69B4;
 }
 
-/* States for cards */
+/* effects for cards */
 
 .card:hover {
     transform: translate(-5px, -5px);
-    /* Moves the card up and left */
     box-shadow: 15px 15px 0 black;
-    /* Extends the shadow */
     cursor: pointer;
-    /* Changes cursor to a hand */
 }
 
-/* 1. STYLE FOR PARAGRAPHS OUTSIDE THE CARDS */
-/* We use 'body > p' to say: "Only paragraphs that are direct children of the body" */
+/* style outside the cards only*/
 body>p {
     background-color: white;
     border: 3px solid black;
     padding: 15px;
 
-    /* THIS IS THE FIX: */
     display: block;
-    /* 1. Forces it to take up its own line (stacking vertically) */
     width: fit-content;
-    /* 2. Tells the white box to only be as wide as the text */
 
     margin: 10px 0 20px 0;
     font-weight: bold;
